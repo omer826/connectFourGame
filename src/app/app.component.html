@@ -1,0 +1,45 @@
+<div >
+
+    <div class="board-main-container" id="board" >
+
+        <div class="header-img">
+          <img class="animated fadeIn" src="../assets/img/header.png">
+        </div>
+      
+        <div [ngClass]="[currentPlayer]" class="player-header-Game flex-align-center justify-center">
+          
+          <p class="animated flash" [ngClass] ="{'hasWinner':winner}"> 
+              <i  class="fas fa-dice" [ngClass]="!winner?'fa-dice':'fa-trophy'"></i>
+            <span>{{headerLable}}</span>
+          </p>
+        </div>
+      
+      
+        <div class="player-header flex justify-between">
+          <p class="red"><i class="fas fa-user-circle"></i>Red player</p>
+          <p class="yellow"><i class="far fa-user-circle"></i>Yellow player</p>
+        </div>
+      
+        <div class="load" *ngIf="loadin">
+          <img src="../assets/img/load.gif">
+        </div>
+        <div >
+          <div class="board-container flex-column" *ngIf="!loadin">
+            <div class="row" *ngFor="let row of board ; let i = index">
+              <div *ngFor="let cell of row ; let j = index" 
+              [ngClass]="[setClass(cell)]" 
+              class="board-col active-{{cell}} animated fadeIn"
+                (click)="onCellClick(i,j)">
+               
+              </div>
+            </div>
+          </div>
+          <div class="footer-board"></div>
+      
+        </div>
+        <div class="footer-game flex-column">
+         
+          <button class="submit" (click)=restart()>PLAY AGAIN</button>
+          <!-- <i class="fas fa-copyright"></i> -->
+        </div>
+</div>
